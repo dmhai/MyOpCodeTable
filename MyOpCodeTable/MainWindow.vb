@@ -12,7 +12,6 @@ Public Class MainWindow
     End Sub
     Private Sub MainWindow_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Cursor = Cursors.WaitCursor
-        ThemeResolutionService.ApplicationThemeName = "FluentDark"
         Icon = My.Resources.My_Icons
         Try
             ListofOpCodes = JsonConvert.DeserializeObject(Of List(Of OpCodesList.MyOpcode))(File.ReadAllText(CachePath))

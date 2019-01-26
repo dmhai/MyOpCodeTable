@@ -14,13 +14,13 @@ Public Class MainWindow
         Cursor = Cursors.WaitCursor
         ThemeResolutionService.ApplicationThemeName = "FluentDark"
         Icon = My.Resources.My_Icons
-        If ListofOpCodes Is Nothing AndAlso File.Exists(CachePath) Then
+        Try
             ListofOpCodes = JsonConvert.DeserializeObject(Of List(Of OpCodesList.MyOpcode))(File.ReadAllText(CachePath))
-        Else
+        Catch ex As Exception
             ListofOpCodes = OpCodesList.GetAll
             Clear(CachePath)
             File.WriteAllText(CachePath, JsonConvert.SerializeObject(ListofOpCodes, Formatting.Indented))
-        End If
+        End Try
         LoadtoDataGrid()
         Cursor = Cursors.Default
     End Sub

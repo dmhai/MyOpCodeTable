@@ -8,11 +8,11 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{33853629-6F17-496B-8DFC-707BD9573E1B}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <StartupObject>MyOpCodeTable.My.MyApplication</StartupObject>
+    <StartupObject>MyOpCodeTable.MainWindow</StartupObject>
     <RootNamespace>MyOpCodeTable</RootNamespace>
     <AssemblyName>MyOpCodeTable</AssemblyName>
     <FileAlignment>512</FileAlignment>
-    <MyType>WindowsForms</MyType>
+    <MyType>WindowsFormsWithCustomSubMain</MyType>
     <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
     <TargetFrameworkProfile />
   </PropertyGroup>
@@ -101,11 +101,8 @@
       <HintPath>..\packages\Newtonsoft.Json.12.0.1\lib\net20\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
-    <Reference Include="System.Xml" />
     <Reference Include="Telerik.WinControls, Version=2018.3.1016.20, Culture=neutral, PublicKeyToken=5bb2a467cbec794e, processorArchitecture=MSIL">
       <HintPath>C:\Program Files (x86)\Progress\Telerik UI for WinForms R3 2018\Bin\Telerik.WinControls.dll</HintPath>
       <Private>True</Private>
@@ -133,6 +130,7 @@
     <Import Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApplicationEvents.vb" />
     <Compile Include="MainWindow.vb">
       <SubType>Form</SubType>
     </Compile>

@@ -9,17 +9,18 @@ Public Class MainWindow
     Public Sub New()
         InitializeComponent()
         AddHandler RadGridView.CreateRow, AddressOf radGridView_CreateRow
+        ThemeResolutionService.ApplicationThemeName = "FluentDark"
     End Sub
     Private Sub MainWindow_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Cursor = Cursors.WaitCursor
         Icon = My.Resources.My_Icons
-        Try
-            ListofOpCodes = JsonConvert.DeserializeObject(Of List(Of OpCodesList.MyOpcode))(File.ReadAllText(CachePath))
-        Catch ex As Exception
+        If Not File.Exists(CachePath) Then
             ListofOpCodes = OpCodesList.GetAll
             Clear(CachePath)
             File.WriteAllText(CachePath, JsonConvert.SerializeObject(ListofOpCodes, Formatting.Indented))
-        End Try
+        Else
+            ListofOpCodes = JsonConvert.DeserializeObject(Of List(Of OpCodesList.MyOpcode))(File.ReadAllText(CachePath))
+        End If
         LoadtoDataGrid()
         Cursor = Cursors.Default
     End Sub
@@ -74,7 +75,7 @@ Public Class MainWindow
         Cursor = Cursors.Default
     End Sub
     Private Sub RadGridView_ContextMenuOpening(ByVal sender As Object, ByVal e As Telerik.WinControls.UI.ContextMenuOpeningEventArgs) Handles RadGridView.ContextMenuOpening
-        e.ContextMenu.Items.Add(New UI.RadMenuSeparatorItem())
+
         Dim LoadDefaultsMenuItem As New UI.RadMenuItem("Load Defaults")
         AddHandler LoadDefaultsMenuItem.Click, AddressOf LoadDefaultsMenuItem_Click
         e.ContextMenu.Items.Add(LoadDefaultsMenuItem)
@@ -82,17 +83,16 @@ Public Class MainWindow
         Dim SaveAllMenuItem As New UI.RadMenuItem("Save All")
         AddHandler SaveAllMenuItem.Click, AddressOf saveToolStripMenuItem_Click
         e.ContextMenu.Items.Add(SaveAllMenuItem)
-
-        Dim LightMenuItem As New UI.RadMenuItem("Light Theme")
-        AddHandler LightMenuItem.Click, AddressOf LightToolStripMenuItem_Click
-        Dim DarkMenuItem As New UI.RadMenuItem("Dark Theme")
-        AddHandler DarkMenuItem.Click, AddressOf DarkToolStripMenuItem_Click
-
         e.ContextMenu.Items.Add(New UI.RadMenuSeparatorItem())
+
         If ThemeResolutionService.ApplicationThemeName.Contains("FluentDark") Then
+            Dim LightMenuItem As New UI.RadMenuItem("Light Theme")
             e.ContextMenu.Items.Add(LightMenuItem)
+            AddHandler LightMenuItem.Click, AddressOf LightToolStripMenuItem_Click
         Else
+            Dim DarkMenuItem As New UI.RadMenuItem("Dark Theme")
             e.ContextMenu.Items.Add(DarkMenuItem)
+            AddHandler DarkMenuItem.Click, AddressOf DarkToolStripMenuItem_Click
         End If
     End Sub
     Private Sub Clear(Path As String)

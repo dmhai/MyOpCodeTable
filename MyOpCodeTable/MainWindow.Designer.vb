@@ -64,7 +64,7 @@ Partial Class MainWindow
         GridViewTextBoxColumn1.MaxWidth = 115
         GridViewTextBoxColumn1.MinWidth = 85
         GridViewTextBoxColumn1.Name = "Name"
-        GridViewTextBoxColumn1.Width = 108
+        GridViewTextBoxColumn1.Width = 110
         GridViewTextBoxColumn1.WrapText = True
         GridViewTextBoxColumn2.EnableExpressionEditor = False
         GridViewTextBoxColumn2.FieldName = "Value"
@@ -73,7 +73,7 @@ Partial Class MainWindow
         GridViewTextBoxColumn2.MinWidth = 85
         GridViewTextBoxColumn2.Name = "Value"
         GridViewTextBoxColumn2.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter
-        GridViewTextBoxColumn2.Width = 108
+        GridViewTextBoxColumn2.Width = 110
         GridViewTextBoxColumn2.WrapText = True
         GridViewTextBoxColumn3.AllowFiltering = False
         GridViewTextBoxColumn3.EnableExpressionEditor = False
@@ -91,7 +91,7 @@ Partial Class MainWindow
         GridViewTextBoxColumn4.HeaderTextAlignment = System.Drawing.ContentAlignment.MiddleLeft
         GridViewTextBoxColumn4.MinWidth = 150
         GridViewTextBoxColumn4.Name = "Info"
-        GridViewTextBoxColumn4.Width = 426
+        GridViewTextBoxColumn4.Width = 439
         GridViewTextBoxColumn4.WrapText = True
         GridViewTextBoxColumn5.AllowFiltering = False
         GridViewTextBoxColumn5.EnableExpressionEditor = False
@@ -152,7 +152,6 @@ Partial Class MainWindow
         Me.RadGridView.ShowGroupPanel = False
         Me.RadGridView.Size = New System.Drawing.Size(1222, 436)
         Me.RadGridView.TabIndex = 0
-        Me.RadGridView.ThemeName = "FluentDark"
         '
         'MainWindow
         '
@@ -166,7 +165,6 @@ Partial Class MainWindow
         '
         Me.RootElement.ApplyShapeToControl = True
         Me.Text = ".Net All Opcodes"
-        Me.ThemeName = "FluentDark"
         CType(Me.RadGridView.MasterTemplate, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RadGridView, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me, System.ComponentModel.ISupportInitialize).EndInit()

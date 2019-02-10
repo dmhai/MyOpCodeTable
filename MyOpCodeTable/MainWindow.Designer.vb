@@ -33,9 +33,7 @@ Partial Class MainWindow
         Dim GridViewTextBoxColumn9 As Telerik.WinControls.UI.GridViewTextBoxColumn = New Telerik.WinControls.UI.GridViewTextBoxColumn()
         Dim FilterDescriptor1 As Telerik.WinControls.Data.FilterDescriptor = New Telerik.WinControls.Data.FilterDescriptor()
         Dim TableViewDefinition1 As Telerik.WinControls.UI.TableViewDefinition = New Telerik.WinControls.UI.TableViewDefinition()
-        Me.FluentDarkTheme = New Telerik.WinControls.Themes.FluentDarkTheme()
         Me.RadGridView = New Telerik.WinControls.UI.RadGridView()
-        Me.FluentTheme = New Telerik.WinControls.Themes.FluentTheme()
         CType(Me.RadGridView, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RadGridView.MasterTemplate, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -171,8 +169,5 @@ Partial Class MainWindow
         Me.ResumeLayout(False)
 
     End Sub
-
-    Friend WithEvents FluentDarkTheme As Telerik.WinControls.Themes.FluentDarkTheme
     Friend WithEvents RadGridView As Telerik.WinControls.UI.RadGridView
-    Friend WithEvents FluentTheme As Telerik.WinControls.Themes.FluentTheme
 End Class

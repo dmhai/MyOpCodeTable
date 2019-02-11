@@ -10,13 +10,12 @@ Public Class MainWindow
 
     Private CachePath As String = Path.GetDirectoryName(Application.ExecutablePath) & "\ListofOpCodes.json"
     Private DictofOpCodes As New Dictionary(Of OpCode, String)
-    Private ListofOpCodes As New List(Of OpCodesList.MyOpcode)
+    Private ListofOpCodes As New List(Of MyOpcode)
     Public Sub New()
         Dim worker As BackgroundWorker = New BackgroundWorker()
         AddHandler worker.DoWork, AddressOf LoadThemeComponents
         worker.RunWorkerAsync()
         InitializeComponent()
-        AddHandler RadGridView.CreateRow, AddressOf radGridView_CreateRow
     End Sub
     Private Sub LoadThemeComponents()
         Dim FluentDarkTheme As New Themes.FluentDarkTheme
@@ -27,10 +26,10 @@ Public Class MainWindow
         Cursor = Cursors.WaitCursor
         Icon = My.Resources.My_Icons
         If Not File.Exists(CachePath) Then
-            DictofOpCodes = OpCodesList.GetAll
+            DictofOpCodes = OpCodes.Xor.GetAll
             LoadtoDataGrid(0)
         Else
-            ListofOpCodes = (Function() JsonConvert.DeserializeObject(Of List(Of OpCodesList.MyOpcode))(File.ReadAllText(CachePath))).Invoke
+            ListofOpCodes = (Function() JsonConvert.DeserializeObject(Of List(Of MyOpcode))(File.ReadAllText(CachePath))).Invoke
             LoadtoDataGrid(1)
             RadGridView.Columns("Name").Sort(UI.RadSortOrder.Ascending, False)
         End If
@@ -47,7 +46,7 @@ Public Class MainWindow
             RadGridView.EndUpdate()
         ElseIf input = 1 Then
             RadGridView.BeginUpdate()
-            For Each item As OpCodesList.MyOpcode In ListofOpCodes
+            For Each item As MyOpcode In ListofOpCodes
                 RadGridView.Rows.Add(item.Name, item.Value, item.Size, item.Info, item.OpCodeType, item.FlowControl, item.OperandType, item.StackBehaviourPush, item.StackBehaviourPop)
             Next
             RadGridView.EndUpdate()
@@ -63,7 +62,7 @@ Public Class MainWindow
                                End Sub)
         Next
     End Sub
-    Private Overloads Sub radGridView_CreateRow(ByVal sender As Object, ByVal e As Telerik.WinControls.UI.GridViewCreateRowEventArgs)
+    Private Overloads Sub radGridView_CreateRow(ByVal sender As Object, ByVal e As Telerik.WinControls.UI.GridViewCreateRowEventArgs) Handles RadGridView.CreateRow
         e.RowInfo.MinHeight = 28
     End Sub
     Private Sub saveToolStripMenuItem_Click(ByVal sender As Object, ByVal e As EventArgs)
@@ -73,7 +72,7 @@ Public Class MainWindow
         Parallel.ForEach(RadGridView.Rows, Sub(cell)
                                                SyncLock ListofOpCodes
                                                    Dim rowi As UI.GridViewRowInfo = RadGridView.Rows(cell.Index)
-                                                   Dim temp As New OpCodesList.MyOpcode With {.Name = rowi.Cells(0).Value.ToString(), .Value = rowi.Cells(1).Value.ToString().ToString,
+                                                   Dim temp As New MyOpcode With {.Name = rowi.Cells(0).Value.ToString(), .Value = rowi.Cells(1).Value.ToString().ToString,
                                                                                        .Size = rowi.Cells(2).Value.ToString(), .Info = rowi.Cells(3).Value.ToString(), .OpCodeType = rowi.Cells(4).Value.ToString(),
                                                                                        .FlowControl = rowi.Cells(5).Value.ToString(), .OperandType = rowi.Cells(6).Value.ToString(), .StackBehaviourPush = rowi.Cells(7).Value.ToString(),
                                                                                        .StackBehaviourPop = rowi.Cells(8).Value.ToString()}
@@ -94,7 +93,7 @@ Public Class MainWindow
     Private Sub LoadDefaultsMenuItem_Click(ByVal sender As Object, ByVal e As EventArgs)
         Cursor = Cursors.WaitCursor
         DictofOpCodes.Clear()
-        DictofOpCodes = OpCodesList.GetAll
+        DictofOpCodes = OpCodes.Xor.GetAll
         Clear(CachePath)
         RadGridView.Rows.Clear()
         LoadtoDataGrid(0)

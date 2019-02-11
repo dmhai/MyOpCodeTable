@@ -1,8 +1,9 @@
 ﻿Imports System.Reflection.Emit
+Imports System.Runtime.CompilerServices
 Imports System.Threading.Tasks
-Public Class OpCodesList
-    Private Shared _table As New Dictionary(Of OpCode, String)
-    Private Shared Function GetDelegate(i As Integer) As Action
+Module OpCodesExtention
+    Private _table As New Dictionary(Of OpCode, String)
+    Private Function GetDelegate(i As Integer) As Action
         Select Case i
             Case 0
                 Return (Sub()
@@ -357,21 +358,21 @@ Public Class OpCodesList
     End Function
 
 
-    Private Shared ReadOnly Property Table As Dictionary(Of OpCode, String)
+    Private ReadOnly Property Table As Dictionary(Of OpCode, String)
         Get
             If _table.Count <= 0 Then
                 For i = 0 To 24
                     Parallel.Invoke(GetDelegate(i))
                 Next
-                Return _table
+                Table = _table
             Else
-                Return GetAll()
+                Table = _table
             End If
         End Get
     End Property
 
-    Public Shared Function GetAll() As Dictionary(Of OpCode, String)
-        Table.Clear()
+    <Extension()>
+    Public Function GetAll(ByVal OpCodeExt As OpCode) As Dictionary(Of OpCode, String)
         Return Table
     End Function
 
@@ -386,4 +387,4 @@ Public Class OpCodesList
         Public Property StackBehaviourPush As String
         Public Property StackBehaviourPop As String
     End Class
-End Class
+End Module

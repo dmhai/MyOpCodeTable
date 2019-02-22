@@ -1,6 +1,7 @@
 ﻿Imports System.Reflection.Emit
 Imports System.Runtime.CompilerServices
 Imports System.Threading.Tasks
+
 Module OpCodesExtention
     Private _table As New Dictionary(Of OpCode, String)
     Private Function GetDelegate(i As Integer) As Action

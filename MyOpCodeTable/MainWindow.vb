@@ -4,11 +4,10 @@ Imports System.Reflection.Emit
 Imports System.Threading.Tasks
 Imports Telerik.WinControls
 Imports Newtonsoft.Json
-
-
 Public Class MainWindow
+    Inherits Telerik.WinControls.UI.RadForm
 
-    Private CachePath As String = Path.GetDirectoryName(Application.ExecutablePath) & "\ListofOpCodes.json"
+    Private ReadOnly CachePath As String = Path.GetDirectoryName(Application.ExecutablePath) & "\ListofOpCodes.json"
     Private DictofOpCodes As New Dictionary(Of OpCode, String)
     Private ListofOpCodes As New List(Of MyOpcode)
     Public Sub New()
@@ -18,13 +17,12 @@ Public Class MainWindow
         InitializeComponent()
     End Sub
     Private Sub LoadThemeComponents()
-        Dim FluentDarkTheme As New Themes.FluentDarkTheme
-        Dim FluentTheme As New Themes.FluentTheme
+        Dim fluentDarkTheme As New Themes.FluentDarkTheme
+        Dim fluentTheme As New Themes.FluentTheme
         ThemeResolutionService.ApplicationThemeName = "FluentDark"
     End Sub
     Private Sub MainWindow_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Cursor = Cursors.WaitCursor
-        Icon = My.Resources.My_Icons
         If Not File.Exists(CachePath) Then
             DictofOpCodes = OpCodes.Xor.GetAll
             LoadtoDataGrid(0)
@@ -41,7 +39,7 @@ Public Class MainWindow
             RadGridView.BeginUpdate()
             For Each item In DictofOpCodes
                 RadGridView.Rows.Add(item.Key.Name.ToString, Conversion.Hex(item.Key.Value), item.Key.Size.ToString, item.Value,
-                                      item.Key.OpCodeType.ToString, item.Key.FlowControl.ToString, item.Key.OperandType.ToString, item.Key.StackBehaviourPush.ToString, item.Key.StackBehaviourPop.ToString)
+                                          item.Key.OpCodeType.ToString, item.Key.FlowControl.ToString, item.Key.OperandType.ToString, item.Key.StackBehaviourPush.ToString, item.Key.StackBehaviourPop.ToString)
             Next
             RadGridView.EndUpdate()
         ElseIf input = 1 Then
@@ -73,9 +71,9 @@ Public Class MainWindow
                                                SyncLock ListofOpCodes
                                                    Dim rowi As UI.GridViewRowInfo = RadGridView.Rows(cell.Index)
                                                    Dim temp As New MyOpcode With {.Name = rowi.Cells(0).Value.ToString(), .Value = rowi.Cells(1).Value.ToString().ToString,
-                                                                                       .Size = rowi.Cells(2).Value.ToString(), .Info = rowi.Cells(3).Value.ToString(), .OpCodeType = rowi.Cells(4).Value.ToString(),
-                                                                                       .FlowControl = rowi.Cells(5).Value.ToString(), .OperandType = rowi.Cells(6).Value.ToString(), .StackBehaviourPush = rowi.Cells(7).Value.ToString(),
-                                                                                       .StackBehaviourPop = rowi.Cells(8).Value.ToString()}
+                                                                                           .Size = rowi.Cells(2).Value.ToString(), .Info = rowi.Cells(3).Value.ToString(), .OpCodeType = rowi.Cells(4).Value.ToString(),
+                                                                                           .FlowControl = rowi.Cells(5).Value.ToString(), .OperandType = rowi.Cells(6).Value.ToString(), .StackBehaviourPush = rowi.Cells(7).Value.ToString(),
+                                                                                           .StackBehaviourPop = rowi.Cells(8).Value.ToString()}
                                                    ListofOpCodes.Add(temp)
                                                End SyncLock
                                            End Sub)

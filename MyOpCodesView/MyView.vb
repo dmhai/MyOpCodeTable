@@ -23,6 +23,7 @@ Public Class Myform
         ThemeResolutionService.ApplicationThemeName = "FluentDark"
     End Sub
     Private Sub MainWindow_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Me.Icon = my.Resources.My_Icons
         Cursor = Cursors.WaitCursor
         If Not File.Exists(CachePath) Then
             DictofOpCodes = OpCodes.Xor.GetAll

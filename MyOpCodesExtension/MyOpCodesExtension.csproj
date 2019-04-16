@@ -45,11 +45,11 @@
     <Reference Include="System.Windows.Forms" />
     <Reference Include="Telerik.WinControls.UI, Version=2019.1.219.40, Culture=neutral, PublicKeyToken=5bb2a467cbec794e, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\lib\RCWF\2019.1.115.40\Telerik.WinControls.UI.dll</HintPath>
+      <HintPath>..\lib\RCWF\2019.1.219.40\Telerik.WinControls.UI.dll</HintPath>
     </Reference>
-    <Reference Include="TelerikCommon, Version=2019.1.115.40, Culture=neutral, PublicKeyToken=5bb2a467cbec794e, processorArchitecture=MSIL">
+    <Reference Include="TelerikCommon, Version=2019.1.219.40, Culture=neutral, PublicKeyToken=5bb2a467cbec794e, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\lib\RCWF\2019.1.115.40\TelerikCommon.dll</HintPath>
+      <HintPath>..\lib\RCWF\2019.1.219.40\TelerikCommon.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

@@ -67,6 +67,13 @@
 del /F /Q *.pdb
 del /F /Q dnlib.dll
 del /F /Q dnSpy.Contracts.DnSpy.dll
-del /F /Q dnSpy.Contracts.Logic.dll</PostBuildEvent>
+del /F /Q dnSpy.Contracts.Logic.dll
+del /F /Q Microsoft.VisualStudio.CoreUtility.dll
+del /F /Q Microsoft.VisualStudio.Language.Intellisense.dll
+del /F /Q Microsoft.VisualStudio.Text.Data.dll
+del /F /Q Microsoft.VisualStudio.Text.Logic.dll
+del /F /Q Microsoft.VisualStudio.Text.UI.dll
+del /F /Q Microsoft.VisualStudio.Text.UI.Wpf.dll
+del /F /Q Microsoft.VisualStudio.Validation.dll</PostBuildEvent>
   </PropertyGroup>
 </Project>

@@ -43,6 +43,10 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Windows.Forms" />
+    <Reference Include="Telerik.WinControls.UI, Version=2019.1.219.40, Culture=neutral, PublicKeyToken=5bb2a467cbec794e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\RCWF\2019.1.219.40\Telerik.WinControls.UI.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="TheExtension.cs" />
@@ -60,17 +64,9 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>del /F /Q *.xml
-del /F /Q *.setup
 del /F /Q *.pdb
 del /F /Q dnlib.dll
 del /F /Q dnSpy.Contracts.DnSpy.dll
-del /F /Q dnSpy.Contracts.Logic.dll
-del /F /Q Microsoft.VisualStudio.CoreUtility.dll
-del /F /Q Microsoft.VisualStudio.Language.Intellisense.dll
-del /F /Q Microsoft.VisualStudio.Text.Data.dll
-del /F /Q Microsoft.VisualStudio.Text.Logic.dll
-del /F /Q Microsoft.VisualStudio.Text.UI.dll
-del /F /Q Microsoft.VisualStudio.Text.UI.Wpf.dll
-del /F /Q Microsoft.VisualStudio.Validation.dll</PostBuildEvent>
+del /F /Q dnSpy.Contracts.Logic.dll</PostBuildEvent>
   </PropertyGroup>
 </Project>

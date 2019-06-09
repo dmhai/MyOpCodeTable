@@ -1,9 +1,9 @@
 ﻿Imports System.IO
-Imports System.ComponentModel
 Imports System.Reflection.Emit
 Imports System.Threading.Tasks
 Imports Newtonsoft.Json
 Imports Telerik.WinControls
+Imports System.Text
 
 Public Class MainWindow
     Inherits Telerik.WinControls.UI.RadForm
@@ -12,14 +12,7 @@ Public Class MainWindow
     Private DictofOpCodes As New Dictionary(Of OpCode, String)
     Private ListofOpCodes As New List(Of MyOpcode)
     Public Sub New()
-        Dim worker As BackgroundWorker = New BackgroundWorker()
-        AddHandler worker.DoWork, AddressOf LoadThemeComponents
-        worker.RunWorkerAsync()
         InitializeComponent()
-    End Sub
-    Private Sub LoadThemeComponents()
-        Dim fluentDarkTheme As New Themes.FluentDarkTheme
-        Dim fluentTheme As New Themes.FluentTheme
         ThemeResolutionService.ApplicationThemeName = "FluentDark"
     End Sub
     Private Sub MainWindow_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -30,28 +23,29 @@ Public Class MainWindow
         Else
             ListofOpCodes = (Function() JsonConvert.DeserializeObject(Of List(Of MyOpcode))(File.ReadAllText(CachePath))).Invoke
             LoadtoDataGrid(1)
-            RadGridView.Columns("Name").Sort(UI.RadSortOrder.Ascending, False)
+            RadGridView1.Columns("Name").Sort(UI.RadSortOrder.Ascending, False)
         End If
         Cursor = Cursors.Default
-        RadGridView.Rows(0).IsCurrent = True
+        RadGridView1.Rows(0).IsCurrent = True
     End Sub
     Private Sub LoadtoDataGrid(input As Integer)
         If input = 0 Then
-            RadGridView.BeginUpdate()
+            RadGridView1.BeginUpdate()
             For Each item In DictofOpCodes
-                RadGridView.Rows.Add(item.Key.Name.ToString, Conversion.Hex(item.Key.Value), item.Key.Size.ToString, item.Value,
+                Dim hex As New StringBuilder
+                RadGridView1.Rows.Add(item.Key.Name.ToString, hex.AppendFormat("{0:x2}", item.Key.Value), item.Key.Size.ToString, item.Value,
                                           item.Key.OpCodeType.ToString, item.Key.FlowControl.ToString, item.Key.OperandType.ToString, item.Key.StackBehaviourPush.ToString, item.Key.StackBehaviourPop.ToString)
             Next
-            RadGridView.EndUpdate()
+            RadGridView1.EndUpdate()
         ElseIf input = 1 Then
-            RadGridView.BeginUpdate()
+            RadGridView1.BeginUpdate()
             For Each item As MyOpcode In ListofOpCodes
-                RadGridView.Rows.Add(item.Name, item.Value, item.Size, item.Info, item.OpCodeType, item.FlowControl, item.OperandType, item.StackBehaviourPush, item.StackBehaviourPop)
+                RadGridView1.Rows.Add(item.Name, item.Value, item.Size, item.Info, item.OpCodeType, item.FlowControl, item.OperandType, item.StackBehaviourPush, item.StackBehaviourPop)
             Next
-            RadGridView.EndUpdate()
+            RadGridView1.EndUpdate()
         End If
-        For Each cell In RadGridView.Rows
-            Dim rowi As UI.GridViewRowInfo = RadGridView.Rows(cell.Index)
+        For Each cell In RadGridView1.Rows
+            Dim rowi As UI.GridViewRowInfo = RadGridView1.Rows(cell.Index)
             Parallel.For(0, 8, Sub(i)
                                    SyncLock cell
                                        If i <> 3 Then
@@ -61,23 +55,23 @@ Public Class MainWindow
                                End Sub)
         Next
     End Sub
-    Private Overloads Sub radGridView_CreateRow(ByVal sender As Object, ByVal e As Telerik.WinControls.UI.GridViewCreateRowEventArgs) Handles RadGridView.CreateRow
+    Private Overloads Sub radGridView_CreateRow(ByVal sender As Object, ByVal e As Telerik.WinControls.UI.GridViewCreateRowEventArgs) Handles RadGridView1.CreateRow
         e.RowInfo.MinHeight = 28
     End Sub
     Private Sub saveToolStripMenuItem_Click(ByVal sender As Object, ByVal e As EventArgs)
         Cursor = Cursors.WaitCursor
         ListofOpCodes.Clear()
         Clear(CachePath)
-        Parallel.ForEach(RadGridView.Rows, Sub(cell)
-                                               SyncLock ListofOpCodes
-                                                   Dim rowi As UI.GridViewRowInfo = RadGridView.Rows(cell.Index)
-                                                   Dim temp As New MyOpcode With {.Name = rowi.Cells(0).Value.ToString(), .Value = rowi.Cells(1).Value.ToString().ToString,
+        Parallel.ForEach(RadGridView1.Rows, Sub(cell)
+                                                SyncLock ListofOpCodes
+                                                    Dim rowi As UI.GridViewRowInfo = RadGridView1.Rows(cell.Index)
+                                                    Dim temp As New MyOpcode With {.Name = rowi.Cells(0).Value.ToString(), .Value = rowi.Cells(1).Value.ToString().ToString,
                                                                                            .Size = rowi.Cells(2).Value.ToString(), .Info = rowi.Cells(3).Value.ToString(), .OpCodeType = rowi.Cells(4).Value.ToString(),
                                                                                            .FlowControl = rowi.Cells(5).Value.ToString(), .OperandType = rowi.Cells(6).Value.ToString(), .StackBehaviourPush = rowi.Cells(7).Value.ToString(),
                                                                                            .StackBehaviourPop = rowi.Cells(8).Value.ToString()}
-                                                   ListofOpCodes.Add(temp)
-                                               End SyncLock
-                                           End Sub)
+                                                    ListofOpCodes.Add(temp)
+                                                End SyncLock
+                                            End Sub)
         Parallel.Invoke(Sub() File.WriteAllText(CachePath, JsonConvert.SerializeObject(ListofOpCodes, Formatting.Indented)))
         Cursor = Cursors.Default
     End Sub
@@ -94,11 +88,11 @@ Public Class MainWindow
         DictofOpCodes.Clear()
         DictofOpCodes = OpCodes.Xor.GetAll
         Clear(CachePath)
-        RadGridView.Rows.Clear()
+        RadGridView1.Rows.Clear()
         LoadtoDataGrid(0)
         Cursor = Cursors.Default
     End Sub
-    Private Sub RadGridView_ContextMenuOpening(ByVal sender As Object, ByVal e As Telerik.WinControls.UI.ContextMenuOpeningEventArgs) Handles RadGridView.ContextMenuOpening
+    Private Sub RadGridView_ContextMenuOpening(ByVal sender As Object, ByVal e As Telerik.WinControls.UI.ContextMenuOpeningEventArgs) Handles RadGridView1.ContextMenuOpening
 
         Dim LoadDefaultsMenuItem As New UI.RadMenuItem("Load Defaults")
         AddHandler LoadDefaultsMenuItem.Click, AddressOf LoadDefaultsMenuItem_Click

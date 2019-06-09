@@ -4,6 +4,10 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 16.0.28729.10
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "MyOpCodeTable", "MyOpCodeTable\MyOpCodeTable.vbproj", "{33853629-6F17-496B-8DFC-707BD9573E1B}"
+	ProjectSection(ProjectDependencies) = postProject
+		{C734A02F-D166-4A57-AC34-1DCC7EA68327} = {C734A02F-D166-4A57-AC34-1DCC7EA68327}
+		{3062F751-DF41-4991-B501-D3F55DCE02AA} = {3062F751-DF41-4991-B501-D3F55DCE02AA}
+	EndProjectSection
 EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "MyOpCodesView", "MyopCodesView\MyOpCodesView.vbproj", "{C734A02F-D166-4A57-AC34-1DCC7EA68327}"
 EndProject

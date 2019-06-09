@@ -1,9 +1,9 @@
 ﻿Imports System.IO
-Imports System.ComponentModel
 Imports System.Reflection.Emit
 Imports Telerik.WinControls
 Imports Newtonsoft.Json
 Imports System.Windows.Forms
+Imports System.Text
 
 Public Class Myform
     Inherits Telerik.WinControls.UI.RadForm
@@ -12,18 +12,11 @@ Public Class Myform
     Private DictofOpCodes As New Dictionary(Of OpCode, String)
     Private ListofOpCodes As New List(Of MyOpcode)
     Public Sub New()
-        Dim worker As BackgroundWorker = New BackgroundWorker()
-        AddHandler worker.DoWork, AddressOf LoadThemeComponents
-        worker.RunWorkerAsync()
         InitializeComponent()
-    End Sub
-    Private Sub LoadThemeComponents()
-        Dim fluentDarkTheme As New Themes.FluentDarkTheme
-        Dim fluentTheme As New Themes.FluentTheme
         ThemeResolutionService.ApplicationThemeName = "FluentDark"
     End Sub
     Private Sub MainWindow_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Me.Icon = my.Resources.My_Icons
+        Me.Icon = My.Resources.My_Icons
         Cursor = Cursors.WaitCursor
         If Not File.Exists(CachePath) Then
             DictofOpCodes = OpCodes.Xor.GetAll
@@ -39,8 +32,9 @@ Public Class Myform
     Private Sub LoadtoDataGrid(input As Integer)
         If input = 0 Then
             RadGridView.BeginUpdate()
+            Dim hex As New StringBuilder
             For Each item In DictofOpCodes
-                RadGridView.Rows.Add(item.Key.Name.ToString, Conversion.Hex(item.Key.Value), item.Key.Size.ToString, item.Value,
+                RadGridView.Rows.Add(item.Key.Name.ToString, hex.AppendFormat("{0:x2}", item.Key.Value), item.Key.Size.ToString, item.Value,
                                           item.Key.OpCodeType.ToString, item.Key.FlowControl.ToString, item.Key.OperandType.ToString, item.Key.StackBehaviourPush.ToString, item.Key.StackBehaviourPop.ToString)
             Next
             RadGridView.EndUpdate()
@@ -156,7 +150,10 @@ Public Class Myform
         Dim GridViewTextBoxColumn9 As Telerik.WinControls.UI.GridViewTextBoxColumn = New Telerik.WinControls.UI.GridViewTextBoxColumn()
         Dim FilterDescriptor1 As Telerik.WinControls.Data.FilterDescriptor = New Telerik.WinControls.Data.FilterDescriptor()
         Dim TableViewDefinition1 As Telerik.WinControls.UI.TableViewDefinition = New Telerik.WinControls.UI.TableViewDefinition()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Myform))
         Me.RadGridView = New Telerik.WinControls.UI.RadGridView()
+        Me.FluentDarkTheme = New Telerik.WinControls.Themes.FluentDarkTheme()
+        Me.FluentTheme = New Telerik.WinControls.Themes.FluentTheme()
         CType(Me.RadGridView, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RadGridView.MasterTemplate, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -185,7 +182,7 @@ Public Class Myform
         GridViewTextBoxColumn1.MaxWidth = 115
         GridViewTextBoxColumn1.MinWidth = 85
         GridViewTextBoxColumn1.Name = "Name"
-        GridViewTextBoxColumn1.Width = 110
+        GridViewTextBoxColumn1.Width = 108
         GridViewTextBoxColumn1.WrapText = True
         GridViewTextBoxColumn2.EnableExpressionEditor = False
         GridViewTextBoxColumn2.FieldName = "Value"
@@ -194,7 +191,7 @@ Public Class Myform
         GridViewTextBoxColumn2.MinWidth = 85
         GridViewTextBoxColumn2.Name = "Value"
         GridViewTextBoxColumn2.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter
-        GridViewTextBoxColumn2.Width = 110
+        GridViewTextBoxColumn2.Width = 108
         GridViewTextBoxColumn2.WrapText = True
         GridViewTextBoxColumn3.AllowFiltering = False
         GridViewTextBoxColumn3.EnableExpressionEditor = False
@@ -212,7 +209,7 @@ Public Class Myform
         GridViewTextBoxColumn4.HeaderTextAlignment = System.Drawing.ContentAlignment.MiddleLeft
         GridViewTextBoxColumn4.MinWidth = 150
         GridViewTextBoxColumn4.Name = "Info"
-        GridViewTextBoxColumn4.Width = 439
+        GridViewTextBoxColumn4.Width = 426
         GridViewTextBoxColumn4.WrapText = True
         GridViewTextBoxColumn5.AllowFiltering = False
         GridViewTextBoxColumn5.EnableExpressionEditor = False
@@ -273,19 +270,22 @@ Public Class Myform
         Me.RadGridView.ShowGroupPanel = False
         Me.RadGridView.Size = New System.Drawing.Size(1222, 436)
         Me.RadGridView.TabIndex = 0
+        Me.RadGridView.ThemeName = "FluentDark"
         '
         'MainWindow
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1222, 436)
         Me.Controls.Add(Me.RadGridView)
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "MainWindow"
         '
         '
         '
         Me.RootElement.ApplyShapeToControl = True
         Me.Text = ".Net All Opcodes"
+        Me.ThemeName = "FluentDark"
         CType(Me.RadGridView.MasterTemplate, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RadGridView, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me, System.ComponentModel.ISupportInitialize).EndInit()
@@ -293,5 +293,7 @@ Public Class Myform
 
     End Sub
     Friend WithEvents RadGridView As Telerik.WinControls.UI.RadGridView
+    Friend WithEvents FluentDarkTheme As Telerik.WinControls.Themes.FluentDarkTheme
+    Friend WithEvents FluentTheme As Telerik.WinControls.Themes.FluentTheme
 
 End Class

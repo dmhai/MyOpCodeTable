@@ -150,7 +150,6 @@ Public Class Myform
         Dim GridViewTextBoxColumn9 As Telerik.WinControls.UI.GridViewTextBoxColumn = New Telerik.WinControls.UI.GridViewTextBoxColumn()
         Dim FilterDescriptor1 As Telerik.WinControls.Data.FilterDescriptor = New Telerik.WinControls.Data.FilterDescriptor()
         Dim TableViewDefinition1 As Telerik.WinControls.UI.TableViewDefinition = New Telerik.WinControls.UI.TableViewDefinition()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Myform))
         Me.RadGridView = New Telerik.WinControls.UI.RadGridView()
         Me.FluentDarkTheme = New Telerik.WinControls.Themes.FluentDarkTheme()
         Me.FluentTheme = New Telerik.WinControls.Themes.FluentTheme()
@@ -278,7 +277,6 @@ Public Class Myform
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1222, 436)
         Me.Controls.Add(Me.RadGridView)
-        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "MainWindow"
         '
         '

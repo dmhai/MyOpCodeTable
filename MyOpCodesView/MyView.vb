@@ -32,8 +32,8 @@ Public Class Myform
     Private Sub LoadtoDataGrid(input As Integer)
         If input = 0 Then
             RadGridView.BeginUpdate()
-            Dim hex As New StringBuilder
             For Each item In DictofOpCodes
+                Dim hex As New StringBuilder
                 RadGridView.Rows.Add(item.Key.Name.ToString, hex.AppendFormat("{0:x2}", item.Key.Value), item.Key.Size.ToString, item.Value,
                                           item.Key.OpCodeType.ToString, item.Key.FlowControl.ToString, item.Key.OperandType.ToString, item.Key.StackBehaviourPush.ToString, item.Key.StackBehaviourPop.ToString)
             Next

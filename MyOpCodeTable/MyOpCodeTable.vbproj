@@ -152,6 +152,10 @@
       <HintPath>..\lib\RCWF\2019.2.508.40\Telerik.WinControls.UI.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Telerik.WinControls.UI.Design, Version=2019.2.508.40, Culture=neutral, PublicKeyToken=5bb2a467cbec794e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\RCWF\2019.2.508.40\Telerik.WinControls.UI.Design.dll</HintPath>
+    </Reference>
     <Reference Include="TelerikCommon, Version=2019.2.508.40, Culture=neutral, PublicKeyToken=5bb2a467cbec794e, processorArchitecture=MSIL">
       <HintPath>..\lib\RCWF\2019.2.508.40\TelerikCommon.dll</HintPath>
       <Private>True</Private>

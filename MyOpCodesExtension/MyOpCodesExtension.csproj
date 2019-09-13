@@ -43,9 +43,29 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Windows.Forms" />
-    <Reference Include="Telerik.WinControls.UI, Version=2019.2.508.40, Culture=neutral, PublicKeyToken=5bb2a467cbec794e, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\lib\RCWF\2019.2.508.40\Telerik.WinControls.UI.dll</HintPath>
+    <Reference Include="Telerik.WinControls, Version=2019.2.618.40, Culture=neutral, PublicKeyToken=5bb2a467cbec794e, processorArchitecture=MSIL">
+      <HintPath>..\lib\RCWF\2019.2.618.40\Telerik.WinControls.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Telerik.WinControls.GridView, Version=2019.2.618.40, Culture=neutral, PublicKeyToken=5bb2a467cbec794e, processorArchitecture=MSIL">
+      <HintPath>..\lib\RCWF\2019.2.618.40\Telerik.WinControls.GridView.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Telerik.WinControls.Themes.Fluent, Version=2019.2.618.40, Culture=neutral, PublicKeyToken=5bb2a467cbec794e, processorArchitecture=MSIL">
+      <HintPath>..\lib\RCWF\2019.2.618.40\Telerik.WinControls.Themes.Fluent.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Telerik.WinControls.Themes.FluentDark, Version=2019.2.618.40, Culture=neutral, PublicKeyToken=5bb2a467cbec794e, processorArchitecture=MSIL">
+      <HintPath>..\lib\RCWF\2019.2.618.40\Telerik.WinControls.Themes.FluentDark.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Telerik.WinControls.UI, Version=2019.2.618.40, Culture=neutral, PublicKeyToken=5bb2a467cbec794e, processorArchitecture=MSIL">
+      <HintPath>..\lib\RCWF\2019.2.618.40\Telerik.WinControls.UI.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="TelerikCommon, Version=2019.2.618.40, Culture=neutral, PublicKeyToken=5bb2a467cbec794e, processorArchitecture=MSIL">
+      <HintPath>..\lib\RCWF\2019.2.618.40\TelerikCommon.dll</HintPath>
+      <Private>True</Private>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -67,13 +87,11 @@
 del /F /Q *.pdb
 del /F /Q dnlib.dll
 del /F /Q dnSpy.Contracts.DnSpy.dll
-del /F /Q dnSpy.Contracts.Logic.dll
-del /F /Q Microsoft.VisualStudio.CoreUtility.dll
-del /F /Q Microsoft.VisualStudio.Language.Intellisense.dll
-del /F /Q Microsoft.VisualStudio.Text.Data.dll
-del /F /Q Microsoft.VisualStudio.Text.Logic.dll
-del /F /Q Microsoft.VisualStudio.Text.UI.dll
-del /F /Q Microsoft.VisualStudio.Text.UI.Wpf.dll
-del /F /Q Microsoft.VisualStudio.Validation.dll</PostBuildEvent>
+del /F /Q dnSpy.Contracts.Logic.dll</PostBuildEvent>
   </PropertyGroup>
+  <ProjectExtensions>
+    <VisualStudio>
+      <UserProperties ShouldAddDPIScalingManifest="False" />
+    </VisualStudio>
+  </ProjectExtensions>
 </Project>

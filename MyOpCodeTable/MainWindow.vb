@@ -7,7 +7,8 @@ Imports System.Text
 
 Public Class MainWindow
     Inherits Telerik.WinControls.UI.RadForm
-
+    'GetType(OpCodes).GetFields
+    'Dim iOpcode As OpCode = item.GetValue(Nothing)
     Private ReadOnly CachePath As String = Path.GetDirectoryName(Application.ExecutablePath) & "\ListofOpCodes.json"
     Private DictofOpCodes As New Dictionary(Of OpCode, String)
     Private ListofOpCodes As New List(Of MyOpcode)
